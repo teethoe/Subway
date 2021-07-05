@@ -47,6 +47,19 @@ def get_ratio(points):
         return 1
 
 
+def crop(pts, d):
+    for i in range(4):
+        if i % 2 == 0:
+            pts[i][0] += d
+        else:
+            pts[i][0] -= d
+        if i < 2:
+            pts[i][1] += d
+        else:
+            pts[i][1] -= d
+    return pts
+
+
 class Process:
     def __init__(self, img):
         self.img = cv2.resize(img, None, fx=0.5, fy=0.5, interpolation=cv2.INTER_CUBIC)
@@ -60,7 +73,6 @@ class Process:
         # th2 = cv2.adaptiveThreshold(grey, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 5, 2)
         # th2 = cv2.morphologyEx(th2, cv2.MORPH_OPEN, kernel2)
         th = cv2.morphologyEx(th, cv2.MORPH_OPEN, kernel2)
-
         h, w = th.shape[:2]
         mask = np.zeros((h + 2, w + 2), np.uint8)
         flood = th.copy()
@@ -111,13 +123,15 @@ class Process:
         for i in range(4):
             y = maxComb[i][0]
             x = maxComb[i][1]
-            maxComb[i] = (x, y)
+            maxComb[i] = [x, y]
 
         temp = maxComb[2]
         maxComb[2] = maxComb[3]
         maxComb[3] = temp
 
         ratio = get_ratio(maxComb)
+        if ratio == 2:
+            maxComb = crop(maxComb, 7)
 
         trans = transform(self.img, maxComb, ratio)
         return trans
