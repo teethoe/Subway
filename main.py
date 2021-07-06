@@ -11,7 +11,7 @@ colour_pos = [0 for i in range(5)]
 ordered = [0 for i in range(5)]
 
 for i in range(5):
-    img = cv2.imread('./img/samples/official/sample 3/{}.png'.format(i+1))
+    img = cv2.imread('./img/samples/official/sample 4/{}.png'.format(i+1))
     img = Process(img).fix()
     fixed[i] = img
     #img = cv2.resize(img, (100, 100), interpolation=cv2.INTER_AREA)
@@ -39,7 +39,10 @@ for i in range(1, 5):
     for j in range(5):
         if j != side:
             if val-6 <= colour_pos[j][0][0] <= val+6:
-                ordered[i] = fixed[j]
+                print((4-i)%2)
+                if fixed[j].shape[1] != ordered[0].shape[(4-i)%2]:
+                    print('yo')
+                    ordered[i] = fixed[j]
 
 for i in range(5):
     print(colour_pos[i])
