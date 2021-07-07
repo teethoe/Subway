@@ -27,6 +27,6 @@ def transform(img, pts, ratio):
 def stitch(images):
     bottom = cv2.hconcat(images[1:])
     top = np.zeros(bottom.shape, np.uint8)
-    top[0:top.shape[0], images[1].shape[1]:(images[1].shape[1]+images[2].shape[1])] = images[0]
+    top[0:top.shape[0], images[1].shape[1]:(images[1].shape[1]+images[0].shape[1])] = images[0]
     mosaic = cv2.vconcat([top, bottom])
     return mosaic
