@@ -17,7 +17,7 @@ for i in range(5):
     # img = cv2.resize(img, (100, 100), interpolation=cv2.INTER_AREA)
 
     x = Identify(img)
-    # x.pie()
+    x.pie()
 
     colour_pos[i] = x.get_position()
 

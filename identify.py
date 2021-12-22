@@ -68,9 +68,7 @@ class Identify:
     def get_colours(self):
         removed = False
         mod = self.img.reshape(self.img.shape[0] * self.img.shape[1], 3)
-
         clf = KMeans(n_clusters=5)
-
         labels = clf.fit_predict(mod)
         counts = Counter(labels)
         del counts[counts.most_common()[0][0]]
@@ -142,7 +140,7 @@ class Identify:
         rgb_colours = [hsv_to_rgb(norm_hsv[i]) for i in range(len(norm_hsv))]
         rgb_colours = denormalise_rgb(rgb_colours)
         hex_colours = [rgb2hex(rgb_colours[i]) for i in range(len(norm_hsv))]'''
-        hex_colours = [rgb2hex(self.rgb_colours[i]) for i in range(len(self.hsv_colours))]
+        hex_colours = [rgb2hex(self.rgb_colours[i]) for i in range(len(self.rgb_colours))]
 
         plt.figure(figsize=(8, 6))
         plt.pie(self.counts.values(), labels=hex_colours, colors=hex_colours)

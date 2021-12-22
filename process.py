@@ -88,7 +88,7 @@ class Process:
         cv2.normalize(dst, dst_norm, alpha=0, beta=255, norm_type=cv2.NORM_MINMAX)
         dst_norm_scaled = cv2.convertScaleAbs(dst_norm)
         # print(dst.max())
-        # self.img[dst_norm_scaled > 100] = (0, 0, 255)
+        # self.img[dst_norm_scaled > 120] = (0, 0, 255)
         points = []
         for i in range(dst_norm.shape[0]):
             for j in range(dst_norm.shape[1]):
